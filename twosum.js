@@ -23,7 +23,7 @@ const target = 4;
 // twoSum(array, target);
 
 /**
- * This is the Hash enhanced function which basically tries
+ * This is the Hash enhanced TwoSum function which basically tries
  * to find the complement for the sum and the current index. We
  * store the values in the array we have already checked in a seen Set,
  * that helps us keep track of what numbers we have already passed and
@@ -32,18 +32,54 @@ const target = 4;
  * @param {int} target The sum value to look for.
  */
 function hashTwoSum(array, target) {
-  let seen = new Set();
-  for (let i = 0; i < array.length; i++) {
-    const complement = target - array[i];
+  const seen = new Set();
+  const usedPairs = new Set();
+  const results = [];
+
+  for (let num of array) {
+    const complement = target - num;
 
     if (seen.has(complement)) {
-      console.log(`${complement} + ${array[i]}`);
+      const pairKey = [num, complement].sort((a, b) => a - b).join(",");
+
+      if (!usedPairs.has(pairKey)) {
+        results.push([num, complement]);
+        usedPairs.add(pairKey);
+        console.log(`${num} + ${complement}`);
+      }
     }
 
-    seen.add(array[i]);
+    seen.add(num);
   }
-
-  console.log(seen);
 }
 
-hashTwoSum(array, target);
+// hashTwoSum(array, target);
+
+/**
+ * Function hashSortedArray() is the twosum function for the
+ * sorted array which uses two pointer method, where we have a
+ * left and right pointer closing into the middle from both sides.
+ * @param {int[]} array The array to be passed.
+ * @param {int} target The sum value to look for.
+ */
+function hashSortedTwoSum(array, target) {
+  const sorted = array.sort((a, b) => a - b);
+  const length = array.length;
+
+  let left = 0;
+  right = length - 1;
+
+  while (left < right) {
+    const con = sorted[left] + sorted[right];
+    if (con === target) {
+      console.log(`Found: ${sorted[left]} + ${sorted[right]}`);
+      return;
+    } else if (con < target) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+}
+
+hashSortedTwoSum(array, target);
