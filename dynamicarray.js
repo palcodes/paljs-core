@@ -38,7 +38,7 @@ class DynamicArray {
       this.resize();
     }
 
-    this.arr[this.length] = n;
+    this.arr[this.length] = v;
     this.length++;
   }
 
