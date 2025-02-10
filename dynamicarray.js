@@ -82,3 +82,10 @@ class DynamicArray {
     return this.capacity;
   }
 }
+
+
+const a = new DynamicArray(8);
+a.pushback(2);
+console.log(a.getSize())
+console.log(a.arr);
+
