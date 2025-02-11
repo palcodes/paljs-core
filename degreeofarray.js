@@ -27,7 +27,7 @@ var findShortestSubArray = function (nums) {
     }
   });
 
-  console.log(minLength);
+  return minLength;
 };
 
 findShortestSubArray([1, 3, 2, 2, 3, 1]);
