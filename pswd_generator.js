@@ -26,7 +26,7 @@ function advPswdGenerator() {
 	let number_set = "0123456789";
 	let symbol_set = "*&^%$#@!";
 
-	const finalChar = [];
+	const finalCharArr = [];
 	let possible_sets = [smallcase_set, uppercase_set, number_set, symbol_set];
 	let prevCycle = 0;
 
@@ -36,7 +36,7 @@ function advPswdGenerator() {
 
 		for (let j = 0; j < count; j++) {
 			const randChar = Math.floor(Math.random() * possible_sets[i].length)
-			finalChar.push(possible_sets[i][randChar]);
+			finalCharArr.push(possible_sets[i][randChar]);
 		}
 		prevCycle = count + prevCycle;
 	}
@@ -58,29 +58,26 @@ function advPswdGenerator() {
 	// 	}
 	// }
 
-	return finalChar.join('').toString()
+	const shuffledFinalChar = shuffleArray(finalCharArr)
+
+	return shuffledFinalChar.join('').toString()
 }
-  /** 
-  * It's also possible to first generate an array of count (of charTypes)
-  */
-	// let possible_sets = 4;
-	// let count_set = [];
-	// let prevCycle = 0;
-	// for (let i = 0; i < possible_sets; i++) {
 
-	// 	const random = Math.floor(Math.random() * (length - prevCycle));
-	// 	const count = (random === 0 || random > Math.floor(length / 2)) ? 1 : random;
-	// 	prevCycle = count + prevCycle;
-	// 	if (i === possible_sets - 1) {
-	// 		console.log('IF: ', length, prevCycle)
-	// 		count_set[i] = (length - prevCycle) + 1;
-	// 	} else {
-	// 		console.log('ELSE: ', length, prevCycle)
-	// 		count_set.push(count)
-	// 	}
-	// }
 
-	return finalChar.join('').toString()
+/**
+ * Shuffles an array in place using the Fisher-Yates (Knuth) algorithm.
+ * @param {Array} array The array to shuffle.
+ */
+function shuffleArray(array) {
+	// Loop backwards from the last element down to the second element
+	for (let i = array.length - 1; i > 0; i--) {
+		// Pick a random index from 0 to i (inclusive)
+		const j = Math.floor(Math.random() * (i + 1));
+
+		[array[i], array[j]] = [array[j], array[i]];
+		return array;
+	}
+	return array;
 }
 
 
